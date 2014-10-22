@@ -30,15 +30,12 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
 RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- $OPTS
 
-VOLUME /var/www
-
 ADD run-php5.bash /usr/local/bin/run-php5
-
-ENTRYPOINT ["dealweb"]
+ENTRYPOINT ["run-php5"]
 CMD ["serve"]
 
+VOLUME /var/www
 WORKDIR /var/www
 
 ONBUILD ADD . /var/www
 ONBUILD RUN [ -f composer.json ] && composer install || true
-
