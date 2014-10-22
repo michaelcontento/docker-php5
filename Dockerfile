@@ -37,5 +37,7 @@ CMD ["serve"]
 VOLUME /var/www
 WORKDIR /var/www
 
+EXPOSE 9000
+
 ONBUILD ADD . /var/www
 ONBUILD RUN [ -f composer.json ] && composer install || true
