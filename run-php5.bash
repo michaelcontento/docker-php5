@@ -10,5 +10,5 @@ elif [ $1 == "composer" ]; then
     exec composer $@
 else
     echo "===> Running command"
-    exec php app/console $@
+    exec $@
 fi
