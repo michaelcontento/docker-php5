@@ -32,7 +32,7 @@ RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
 
 VOLUME /var/www
 
-ADD dealweb.bash /usr/local/bin/dealweb
+ADD run-php5.bash /usr/local/bin/run-php5
 
 ENTRYPOINT ["dealweb"]
 CMD ["serve"]
