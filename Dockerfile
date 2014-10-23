@@ -28,6 +28,9 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
     && echo "error_reporting = E_ALL" >> $INI \
     && echo "expose_php = Off" >> $INI
 
+# poor man's CI
+RUN php5-fpm -t 2>&1
+
 RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- $OPTS
 
