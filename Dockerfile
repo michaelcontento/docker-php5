@@ -25,6 +25,7 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
     && echo "cgi.fix_pathinfo = 0" >> $INI \
     && echo "date.timezone = UTC" >> $INI \
     && echo "error_log = /dev/stderr" >> $INI \
+    && echo "error_reporting = E_ALL" >> $INI \
     && echo "expose_php = Off" >> $INI
 
 RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
