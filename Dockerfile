@@ -31,7 +31,7 @@ RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- $OPTS
 
 ADD run-php5.bash /usr/local/bin/run-php5
-ENTRYPOINT ["/run-php5"]
+ENTRYPOINT ["run-php5"]
 CMD ["serve"]
 
 VOLUME /var/www
