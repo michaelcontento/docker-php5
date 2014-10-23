@@ -30,9 +30,9 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
 RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- $OPTS
 
-ADD run-php5.bash /usr/local/bin/run-php5
-ENTRYPOINT ["run-php5"]
-CMD ["serve"]
+ADD server.bash /usr/local/bin/server
+ENTRYPOINT []
+CMD ["server"]
 
 VOLUME /var/www
 WORKDIR /var/www
