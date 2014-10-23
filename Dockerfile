@@ -31,7 +31,6 @@ RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- $OPTS
 
 ADD server.bash /usr/local/bin/server
-ENTRYPOINT []
 CMD ["server"]
 
 VOLUME /var/www
