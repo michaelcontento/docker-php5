@@ -6,9 +6,11 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
     && apt-get update \
     && apt-get install --yes --no-install-recommends php5-cli php5-fpm php-apc \
     && apt-get install --yes --no-install-recommends $EXTENSIONS \
-    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN \
     # == php-fpm pool settings
-    && INI="/etc/php5/fpm/pool.d/www.conf" \
+    INI="/etc/php5/fpm/pool.d/www.conf" \
     && echo 'listen = 9000' >> $INI \
     && echo 'php_admin_value[error_log] = /dev/stderr' >> $INI \
     && echo 'php_flag[display_errors] = off' >> $INI \
