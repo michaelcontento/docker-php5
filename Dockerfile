@@ -8,9 +8,7 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
     && apt-get install --yes --no-install-recommends $EXTENSIONS \
     && rm -rf /var/lib/apt/lists/*
 
-RUN \
-    # == php-fpm pool settings
-    INI="/etc/php5/fpm/pool.d/www.conf" \
+RUN INI="/etc/php5/fpm/pool.d/www.conf" \
     && echo 'listen = 9000' >> $INI \
     && echo 'php_admin_value[error_log] = /dev/stderr' >> $INI \
     && echo 'php_flag[display_errors] = off' >> $INI \
@@ -18,11 +16,11 @@ RUN \
     && echo 'php_value[default_charset] = utf-8' >> $INI \
     && echo 'request_slowlog_timeout = 60s' >> $INI \
     && echo 'slowlog = /dev/stdout' >> $INI \
-    # == php-fpm settings
+    \
     && INI="/etc/php5/fpm/php-fpm.conf" \
     && sed -i -e "s/;daemonize = .*/daemonize = Off/" $INI \
     && sed -i -e "s/error_log = .*/error_log = \/dev\/stderr/" $INI \
-    # == settings for both php and php-fpm
+    \
     && INI="/etc/php5/conf.d/00-defaults.ini" \
     && echo "cgi.fix_pathinfo = 0" >> $INI \
     && echo "date.timezone = UTC" >> $INI \
