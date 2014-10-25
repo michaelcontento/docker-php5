@@ -4,7 +4,7 @@ RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
     && export DEBIAN_FRONTEND=noninteractive \
     && echo 'force-unsafe-io' > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
     && apt-get update \
-    && apt-get install --yes --no-install-recommends php5-cli php5-fpm php-apc procps \
+    && apt-get install --yes --no-install-recommends php5-cli php5-fpm php-apc \
     && apt-get install --yes --no-install-recommends $EXTENSIONS \
     && rm -rf /var/lib/apt/lists/* \
     # == php-fpm pool settings
