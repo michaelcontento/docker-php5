@@ -34,7 +34,7 @@ RUN php5-fpm -t 2>&1
 RUN OPTS="--install-dir=/usr/bin/ --filename=composer" \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- $OPTS
 
-RUN ln -s /usr/sbin/php5-fpm /usr/local/bin/server
+ADD server.bash /usr/local/bin/server
 CMD ["server"]
 
 VOLUME /var/www
