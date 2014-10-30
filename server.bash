@@ -16,7 +16,7 @@ get_environment_vars() {
     done | sort | uniq
 }
 
-clear_environemnt() {
+clear_environment() {
     local cfg=$1
     [ -z $cfg ] && error "config file missing"
 
@@ -35,7 +35,7 @@ add_environment() {
     done
 }
 
-clear_environemnt /etc/php5/fpm/pool.d/www.conf
+clear_environment /etc/php5/fpm/pool.d/www.conf
 add_environment /etc/php5/fpm/pool.d/www.conf
 
 exec php5-fpm
