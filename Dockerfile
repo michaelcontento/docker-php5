@@ -1,11 +1,13 @@
 FROM debian
 
-RUN EXTENSIONS="php5-curl php5-mcrypt php5-intl php5-pgsql" \
-    && export DEBIAN_FRONTEND=noninteractive \
+# TODO: Remove php5-pgsql
+RUN export DEBIAN_FRONTEND=noninteractive \
     && echo 'force-unsafe-io' > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
     && apt-get update \
+    && apt-get install --yes --no-install-recommends git ca-certificates \
     && apt-get install --yes --no-install-recommends php5-cli php5-fpm php-apc \
-    && apt-get install --yes --no-install-recommends $EXTENSIONS \
+    && apt-get install --yes --no-install-recommends php5-mcrypt php5-intl php5-curl \
+    && apt-get install --yes --no-install-recommends php5-pgsql \
     && rm -rf /var/lib/apt/lists/*
 
 RUN INI="/etc/php5/fpm/pool.d/www.conf" \
@@ -44,4 +46,10 @@ WORKDIR /var/www
 EXPOSE 9000
 
 ONBUILD ADD . /var/www
-ONBUILD RUN [ -f composer.json ] && composer install || true
+ONBUILD RUN composer selfupdate
+ONBUILD RUN [ -f composer.github.token ] \
+    && composer config -g github-oauth.github.com $(cat composer.github.token) \
+    || true
+ONBUILD RUN [ -f composer.json ] \
+    && composer install --prefer-dist --optimize-autoloader --no-interaction \
+    || true
