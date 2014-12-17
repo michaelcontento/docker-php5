@@ -26,7 +26,8 @@ RUN INI="/etc/php5/fpm/pool.d/www.conf" \
     && echo "date.timezone = UTC" >> $INI \
     && echo "error_log = /dev/stderr" >> $INI \
     && echo "error_reporting = E_ALL" >> $INI \
-    && echo "expose_php = Off" >> $INI
+    && echo "expose_php = Off" >> $INI \
+    && echo "short_open_tag = Off" >> $INI
 
 # poor man's CI
 RUN php5-fpm -t 2>&1
