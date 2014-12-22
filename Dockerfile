@@ -24,7 +24,6 @@ RUN INI="/etc/php5/fpm/pool.d/www.conf" \
     && sed -i -e "s/error_log = .*/error_log = \/dev\/stderr/" $INI \
     \
     && INI="/etc/php5/conf.d/00-defaults.ini" \
-    && echo "cgi.fix_pathinfo = 0" >> $INI \
     && echo "date.timezone = UTC" >> $INI \
     && echo "error_log = /dev/stderr" >> $INI \
     && echo "error_reporting = E_ALL" >> $INI \
