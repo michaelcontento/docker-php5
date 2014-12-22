@@ -12,20 +12,20 @@ RUN export DEBIAN_FRONTEND=noninteractive \
 
 RUN INI="/etc/php5/fpm/pool.d/www.conf" \
     && echo 'listen = 9000' >> $INI \
-    && echo 'php_admin_value[error_log] = /dev/stderr' >> $INI \
+    && echo 'php_admin_value[error_log] = stderr' >> $INI \
     && echo 'php_flag[display_errors] = off' >> $INI \
     && echo 'php_flag[log_errors] = on' >> $INI \
     && echo 'php_value[default_charset] = utf-8' >> $INI \
     && echo 'request_slowlog_timeout = 60s' >> $INI \
-    && echo 'slowlog = /dev/stdout' >> $INI \
+    && echo 'slowlog = stdout' >> $INI \
     \
     && INI="/etc/php5/fpm/php-fpm.conf" \
     && sed -i -e "s/;daemonize = .*/daemonize = Off/" $INI \
-    && sed -i -e "s/error_log = .*/error_log = \/dev\/stderr/" $INI \
+    && sed -i -e "s/error_log = .*/error_log = stderr/" $INI \
     \
     && INI="/etc/php5/conf.d/00-defaults.ini" \
     && echo "date.timezone = UTC" >> $INI \
-    && echo "error_log = /dev/stderr" >> $INI \
+    && echo "error_log = stderr" >> $INI \
     && echo "error_reporting = E_ALL" >> $INI \
     && echo "expose_php = Off" >> $INI \
     && echo "short_open_tag = Off" >> $INI
